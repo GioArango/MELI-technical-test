@@ -12,9 +12,9 @@ export class ProductController {
     
     public getProducts = async (req: Request, res: Response) => {
         try {
-            const product = req.query.q;    
+            const product = req.query.q;
             const getProductsServiceResponse = await this.productServices.getProductsByQuery(product as string)
-
+            
             // lógica que se moverá a otra capa    
             
             if(!getProductsServiceResponse.isSuccessful) {
@@ -28,12 +28,12 @@ export class ProductController {
                     id: product.id,
                     title: product.title,
                     price: {
-                        currency: product.installments.currency_id,
-                        amount: product.installments.amount,
+                        currency: product.currency_id,
+                        amount: product.price,
                         decimals: 0 // https://api.mercadolibre.com/sites/MLA/currencies/${curency_id} -->
                     },
                     picture: product.thumbnail,
-                    condition: product.attributes.find(attribute => attribute.id === 'ITEM_CONDITION')?.value_name,
+                    condition: product.attributes?.find(attribute => attribute.id === 'ITEM_CONDITION')?.value_name,
                     free_shipping: product.shipping.free_shipping
                 }
             })
@@ -50,7 +50,10 @@ export class ProductController {
             
         } catch (error) {
             console.error(error)
-            res.status(500).json(error)
+            res.status(500).json({
+                isSuccess: false,
+                message: 'Error en el servidor'
+            })
         }
     }
 }
