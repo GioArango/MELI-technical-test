@@ -1,5 +1,6 @@
 import express, { Router } from 'express';
 import path, { dirname } from 'path';
+import cors from 'cors';
 
 interface Options {
     port: number;
@@ -27,6 +28,7 @@ export class Server {
 
         // middlewares
         this.app.use(express.static(staticPath));
+        this.app.use(cors())
 
         // routes
         this.app.use( this.routes )                
