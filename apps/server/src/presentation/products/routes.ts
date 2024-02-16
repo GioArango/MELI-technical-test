@@ -10,7 +10,8 @@ export class ProductRoutes {
         const productServices = new ProductService();
         const productController = new ProductController(productServices);
 
-        router.use('/', productController.getProducts)
+        router.get('/', productController.getProducts)
+        router.get('/:id', productController.getProductItem)
 
         return router;
     }
