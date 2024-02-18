@@ -4,11 +4,25 @@ import { IProduct } from "../../models/Product";
 
 export class ProductService {
 
+    /**
+     * 
+     * @param q 
+     * @returns 
+     */
     public getProductsByQuery = async (q: string): Promise<GenericResponse> => {
         try {
             const resp = await axios.get(`https://api.mercadolibre.com/sites/MLA/search?q=${q}&limit=4`)
 
             // mover lógica a otra capa
+
+            let categories: string[] = [];
+
+            if(resp.data?.filters && resp.data?.filters.length > 0) {
+                categories = resp.data?.filters?.find((item: any) => item.id === 'category')
+                    .values[0].path_from_root.map( (path: any) => path.name )
+            }
+
+            const currency = await this.getCurrencyInformation(resp.data.results[0].currency_id);
 
             const productsItems = [];
 
@@ -18,18 +32,19 @@ export class ProductService {
                     title: product.title,
                     price: {
                         currency: product.currency_id,
-                        amount: product.price,
-                        decimals: 0 // https://api.mercadolibre.com/sites/MLA/currencies/${curency_id} -->
+                        amount: `${currency.symbol} ${product.price}`,
+                        decimals: currency.decimals
                     },
                     picture: product.thumbnail,
-                    condition: product.attributes?.find(attribute => attribute.id === 'ITEM_CONDITION')?.value_name,
-                    free_shipping: product.shipping.free_shipping
+                    condition: product.condition === 'new' ? 'Nuevo' : 'Usado',
+                    free_shipping: product.shipping.free_shipping,                    
                 }
             })
 
             productsItems.push(...productInfo)
 
             let response = {
+                categories,
                 items: productsItems
             }
             
@@ -49,10 +64,23 @@ export class ProductService {
         }
     }
     
+    /**
+     * 
+     * @param item 
+     * @returns 
+     */
     public getProductItemById = async (item: string): Promise<GenericResponse> => {
         try {
             const resp = await axios.get(`https://api.mercadolibre.com/items/${item}`)
-            console.log(resp.data)
+
+            const productDescription = await this.getProductDescription(item);
+
+            let productCategories;
+            if (resp.data.category_id) {
+                productCategories = await this.getCategories(resp.data.category_id)
+            }
+
+            const currency = await this.getCurrencyInformation(resp.data.currency_id)
 
             const producItem = {                
                 item: {
@@ -61,13 +89,14 @@ export class ProductService {
                   price: {
                     currency: resp.data.currency_id,
                     amount: resp.data.price,
-                    decimals: 0 //por definir
+                    decimals: currency.decimals
                   },
                   picture: resp.data.pictures[0].url,
                   condition: resp.data.condition,
                   free_shipping: resp.data.shipping.free_shipping,
                   sold_quantity: 0,
-                  description: "DESCIPTION"
+                  description: productDescription,
+                  categories: productCategories
                 }
               }
     
@@ -87,20 +116,57 @@ export class ProductService {
             return resp
         }
     }
-    
-    public getCategoriesByProductId = async(productId: string): Promise<GenericResponse> => {
+
+    /**
+     * 
+     * @param itemId 
+     * @returns 
+     */
+    private getProductDescription = async (itemId: string): Promise<string> => {
         try {
-            const resp = await axios.get(`https://api.mercadolibre.com/categories/${productId}`)
-    
-            return resp.data;
+            const description = await axios.get(`https://api.mercadolibre.com/items/${itemId}/description`)                
+            return description.data.plain_text;
         } catch (error) {
-            console.error(error)
-    
-            const resp: GenericResponse = {
-                isSuccessful: false,
-                errorMessage: error as string
-            }
-            return resp
+            console.error(error);
+            return '';
         }
     }
+
+    /**
+     * 
+     * @param categoryId 
+     * @returns 
+     */
+    private getCategories = async (categoryId: string ): Promise<string[]> => {
+        try {
+            const categoriesResponse = await axios.get(`https://api.mercadolibre.com/categories/${categoryId}`)
+
+            const categories = categoriesResponse.data.path_from_root.map( (path: any) => path.name )
+
+            return categories;
+        } catch (error) {
+            console.error(error)
+            return [];
+        }
+    }
+
+    private getCurrencyInformation = async(currencyId: string) => {
+        try {
+            const currencyInformation = await axios.get(`https://api.mercadolibre.com/currencies/${currencyId}`);
+            const currency = {
+                symbol: currencyInformation.data.symbol,
+                decimals: currencyInformation.data.decimal_places
+            }
+
+            return currency;
+        } catch (error) {
+            console.error(error)
+            const currency = {
+                symbol: '$',
+                decimals: 2
+            }
+
+            return currency;
+        }
+    } 
 }
