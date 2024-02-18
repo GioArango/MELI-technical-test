@@ -1,0 +1,46 @@
+@use "@/scss/abstracts/variables";
+@use '@/scss/abstracts/mixins';
+
+.product-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+
+  .product-image {
+    width: 100px;
+    margin-right: 1rem;
+    @include mixins.border-radius(0.25rem);
+  }
+
+  .product-detail-container {
+    flex-grow: 1;
+
+    .product-price-container {
+        display: flex;
+        margin-bottom: 0.5rem;
+
+        .product-price {
+          display: flex;
+          margin-right: 1rem;
+          font-size: 1.25rem;
+        }
+    }
+
+    .product-title {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+  }
+
+  .product-location {
+    flex-grow: 1;
+    text-align: end;
+    margin: 0.25rem;
+  
+    p {
+      font-size: 0.75rem;
+      color: variables.$meli-gray-dark;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import { IProductItem } from "@/interfaces"
 import { useEffect, useState } from "react"
 import { Helmet } from "react-helmet"
 import { useParams } from "react-router-dom"
+import styles from './ProductDetail.module.scss'
 
 const ProductDetail = () => {
 
@@ -42,48 +43,46 @@ const ProductDetail = () => {
           <>
             <Categories categories={product?.item.categories} />
             <GenericContainer>
-              <div className="body-content">
-                <section className="product-body" style={{ display: 'flex' }}>
-                  <div className="product-image">
-                    <img
-                      src={product?.item?.picture}
-                      alt={product?.item?.title}
-                      style={{ marginInline: 120 }}
-                    />
-                  </div>
-                  <div className="product-resume" style={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                    <div>
-                      <small className="product-usage">
-                        {product?.item.condition === 'new' ? 'Nuevo' : 'Usado'}
-                        <span>&nbsp;-&nbsp;</span>
-                        {product?.item?.sold_quantity}
-                        {' '}
-                        vendidos
-                      </small>
-                    </div>
-                    <p className="product-title">
-                      {product?.item?.title}
-                    </p>
-                    <h2 className="product-resume__h2">
-                      <span>{product?.item?.price.amount}</span>
-                      <span className="meli-supra">
-                        {product?.item?.price.decimals}
-                      </span>
-                    </h2>
-                    <button type="button" className="product-resume__button">
-                      Comprar
-                    </button>
-                  </div>
-                </section>
-              </div>
-              <div>
-                <div className="product-description">
-                  <h3 className="description__h3">Descripción del producto</h3>
-                  <p className="description__p">
-                    {product?.item.description}
-                  </p>
+              <section className={styles['product-body']} style={{ display: 'flex', padding: '0.5rem' }}>
+                <div className={styles['product-image']}>
+                  <img
+                    src={product?.item?.picture}
+                    alt={product?.item?.title}
+                    className={styles['product-image']}
+                  />
                 </div>
-              </div>
+                <div className={styles['product-resume']}>
+                  <div>
+                    <small>
+                      {product?.item.condition === 'new' ? 'Nuevo' : 'Usado'}
+                      <span>&nbsp;-&nbsp;</span>
+                      {product?.item?.sold_quantity}
+                      {' '}
+                      vendidos
+                    </small>
+                  </div>
+                  <p className={styles["product-title"]}>
+                    <strong>{product?.item?.title}</strong>
+                  </p>
+                  <div style={{ display: 'flex' }}>
+                    <h2 className={styles['product-price']}>
+                      <span>{product?.item?.price.amount}</span>
+                    </h2>
+                    <small>
+                      {product?.item?.price.amount.toFixed(2).split('.')[1]}
+                    </small>
+                  </div>
+                  <button type="button" className={styles['button-buy']}>
+                    Comprar
+                  </button>
+                </div>
+              </section>
+              <section className="product-description" style={{ marginTop: 40, padding: 10 }}>
+                <p className="description__h3" style={{ fontSize: '1.6rem', marginBlock: 20 }}>Descripción del producto</p>
+                <p className="description__p" style={{ fontSize: '1.rem', textAlign: 'justify' }}>
+                  {product?.item.description ? product?.item.description : 'Descripción no disponible'}
+                </p>
+              </section>
             </GenericContainer>
           </>
       }

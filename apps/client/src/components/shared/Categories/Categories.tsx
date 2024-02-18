@@ -1,4 +1,4 @@
-
+import styles from './Categories.module.scss';
 interface Props {
     categories: string[] | undefined;
 }
@@ -6,8 +6,8 @@ interface Props {
 export const Categories = ({ categories }: Props) => {
 
     return (
-        <section style={{ marginInline: 50, padding: 20 }}>
-            <span>{categories && categories.join(' > ')}</span>
+        <section className={styles.categories}>
+            <span className={styles['categories__text-categories']}>{categories && categories.join(' > ')}</span>
         </section>
     )
 }

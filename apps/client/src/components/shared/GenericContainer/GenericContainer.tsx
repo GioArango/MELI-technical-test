@@ -1,4 +1,4 @@
-import styles from './GenericContainer.module.css';
+import styles from './GenericContainer.module.scss';
 import { ReactElement } from 'react';
 
 interface Props {

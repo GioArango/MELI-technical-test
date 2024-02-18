@@ -1,30 +1,29 @@
 import { PATHS } from "@/constants";
 import { IProductListItem } from "@/interfaces";
 import { Link } from "react-router-dom";
+import styles from '../../ProductList.module.scss';
 
 interface Props {
     product: IProductListItem;
 }
 
 export const ProductItem = ({ product }: Props) => {
-    
-    return (
-        <div style={{ display: 'flex', flexDirection: 'row', width: '80vw', justifyContent: 'center', gap: 1, padding: 2 }}>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 5 }}>
-                <Link to={`${PATHS.PRODUCTS}/${product.id}`}>
-                    <img src={product.picture} alt={product.title} style={{ marginInline: 30 }} width={100} />
-                </Link>
-            </div>
 
-            <div style={{ flexGrow: 1 }}>
-                <div style={{ display: 'flex' }}>
-                    <p style={{ marginRight: 20 }}>{product.price.amount}</p>
+    return (
+        <div className={styles['product-container']}>
+            <Link to={`${PATHS.PRODUCTS}/${product.id}`}>
+                <img src={product.picture} alt={product.title} className={styles['product-image']} />
+            </Link>
+
+            <div className={styles['product-detail-container']}>
+                <div className={styles['product-price-container']}>
+                    <p className={styles['product-price']}>{product.price.amount}</p>
                     <p>{product.free_shipping && 'envio gratis'}</p>
                 </div>
-                <span>{product.title}</span>
+                <p className={styles['product-title']}>{product.title}</p>
             </div>
 
-            <div style={{ flexGrow: 1, textAlign: 'end', margin: 10 }}>
+            <div className={styles['product-location']}>
                 <p>{"Ciudad"}</p>
             </div>
         </div>

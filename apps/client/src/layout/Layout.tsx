@@ -1,6 +1,6 @@
 import { SearchInput } from "@/components";
 import { Outlet, useNavigate } from "react-router-dom";
-import styles from './Layout.module.css';
+import styles from './Layout.module.scss';
 import { Helmet } from 'react-helmet'
 
 const Layout = () => {
@@ -14,7 +14,7 @@ const Layout = () => {
     }
 
     return (
-        <main className={styles['app']}>
+        <main className={styles.app}>
             <Helmet>
                 <title>MELI | Bucar producto</title>
             </Helmet>
