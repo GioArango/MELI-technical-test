@@ -17,6 +17,7 @@ export default defineConfig({
       "@models": path.resolve(__dirname, "src/models/"),
       "@pages": path.resolve(__dirname, "src/pages/"),
       "@router": path.resolve(__dirname, "src/router/"),
+      "@sass": path.resolve(__dirname, "src/sass/"),
     }
   }
 })

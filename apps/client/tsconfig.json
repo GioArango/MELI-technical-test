@@ -37,6 +37,9 @@
       ],
       "@router": [
         "./src/router/"
+      ],
+      "@sass": [
+        "./src/sass/"
       ]
     },
 
