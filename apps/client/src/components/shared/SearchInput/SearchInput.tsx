@@ -19,6 +19,7 @@ const SearchInput = ({ onSearch }: Props) => {
   const onSubmitForm = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (searchCriteria === '') return;
     onSearch(searchCriteria);
   }
 
