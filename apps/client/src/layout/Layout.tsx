@@ -1,6 +1,7 @@
 import { SearchInput } from "@/components";
 import { Outlet, useNavigate } from "react-router-dom";
 import styles from './Layout.module.css';
+import { Helmet } from 'react-helmet'
 
 const Layout = () => {
 
@@ -13,15 +14,14 @@ const Layout = () => {
     }
 
     return (
-        <main className={styles['main']}>
+        <main className={styles['app']}>
+            <Helmet>
+                <title>MELI | Bucar producto</title>
+            </Helmet>
             <header className={styles['header-container']}>
                 <SearchInput onSearch={handleSearch} />
             </header>
-            <section className={styles['main-container']}>
-                <div className={styles.container}>
-                    <Outlet />
-                </div>
-            </section>
+            <Outlet />
         </main>
     )
 }
