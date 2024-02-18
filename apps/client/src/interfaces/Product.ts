@@ -1,12 +1,12 @@
 import { IAuthor, IPrice } from ".";
 
-export interface IProduct {
+export interface IProductsList {
     author:     IAuthor;
     categories: string[];
-    items:      IProductItem[];
+    items:      IProductListItem[];
 }
 
-export interface IProductItem {
+export interface IProductListItem {
     id:            string;
     title:         string;
     price:         IPrice;
@@ -15,3 +15,18 @@ export interface IProductItem {
     free_shipping: boolean;
 }
 
+export interface IProduct  {
+    id:           string;
+    title:        string;
+    price:        IPrice;
+    picture:      string;
+    condition:    string;
+    freeShipping: boolean;
+    sold_quantity: number;
+    description:  string;
+    categories: string[];
+}
+
+export interface IProductItem {
+    item: IProduct
+}
