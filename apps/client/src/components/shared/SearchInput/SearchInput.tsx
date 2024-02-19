@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import styles from './SearchInput.module.css';
+import styles from './SearchInput.module.scss';
+import iconSearch from '@/assets/icon_search.png'
 
 interface Props {
   onSearch: (searchCriteria: string) => void;
@@ -32,7 +33,9 @@ const SearchInput = ({ onSearch }: Props) => {
         defaultValue={queryParamValue ? queryParamValue : ''}
         onChange={handleChange} 
         />
-      <button type="submit" className={styles['search-button']}>B</button>
+      <button type="submit" className={styles['search-button']}>
+        <img src={iconSearch} alt='Icono buscar'/>
+      </button>
     </form>
   )
 }

@@ -1,0 +1,50 @@
+@use '@/scss/abstracts/variables';
+
+.search-container {
+	display: flex;
+	align-items: center;
+ 	width: 75%;
+}
+
+.search-input {
+  flex: 1;
+	padding: 7.5px;
+	font-size: 16px;
+	border: 1px solid variables.$meli-gray-light;
+	border-radius: 3px 0 0 3px;
+	outline: none;
+}
+
+.search-button {
+	padding: 6px 4px;
+	background-color: variables.$meli-gray-light;
+	color: variables.$meli-black;
+	border: 1px solid variables.$meli-gray-light;
+	border-radius: 0 5px 5px 0;
+	cursor: pointer;
+	outline: none;
+	display: flex;
+	align-items: center;
+  }
+  
+  .search-button img {
+	width: 20px;
+	height: 20px;
+  }
+  
+  @media (max-width: 768px) {
+	.search-button {
+	  padding: 7px 2px;
+	}
+  
+	.search-button img {
+	  width: 18px;
+	  height: 18px;
+	}
+  }
+  
+
+.search-button:hover {
+	background-color: variables.$meli-gray;
+	border-color: variables.$meli-gray;
+}
