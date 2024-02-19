@@ -2,6 +2,7 @@ import { PATHS } from "@/constants";
 import { IProductListItem } from "@/interfaces";
 import { Link } from "react-router-dom";
 import styles from '../../ProductList.module.scss';
+import iconShipping from '@assets/icon_shipping.png'
 
 interface Props {
     product: IProductListItem;
@@ -18,7 +19,7 @@ export const ProductItem = ({ product }: Props) => {
             <div className={styles['product-detail-container']}>
                 <div className={styles['product-price-container']}>
                     <p className={styles['product-price']}>{product.price.amount}</p>
-                    <p>{product.free_shipping && 'envio gratis'}</p>
+                    {product.free_shipping && <img src={iconShipping} width={18} alt="Icono envío gratis"/>}
                 </div>
                 <p className={styles['product-title']}>{product.title}</p>
             </div>
