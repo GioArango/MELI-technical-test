@@ -25,7 +25,7 @@ export const ProductItem = ({ product }: Props) => {
             </div>
 
             <div className={styles['product-location']}>
-                <p>{"Ciudad"}</p>
+                <p>{product.location}</p>
             </div>
         </div>
     )
