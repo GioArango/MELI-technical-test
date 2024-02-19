@@ -13,6 +13,7 @@ export interface IProductListItem {
     picture:       string;
     condition:     string;
     free_shipping: boolean;
+    location:      string;
 }
 
 export interface IProduct  {
