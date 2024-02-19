@@ -68,6 +68,7 @@ export interface IProductResult {
     discounts:           null;
     promotions:          any[];
     inventory_id:        null;
+    location?:           Location;
 }
 
 export interface Attribute {
@@ -196,7 +197,6 @@ export interface IProductItem {
     international_delivery_mode:      string;
     seller_address:                   SellerAddress;
     seller_contact:                   null;
-    location:                         Location;
     coverage_areas:                   any[];
     attributes:                       Attribute[];
     listing_source:                   string;
@@ -236,6 +236,14 @@ export interface Value {
 }
 
 export interface Location {
+    address_line:    string;
+    zip_code:        string;
+    subneighborhood: null;
+    city:            City;
+    state:           City;
+    country:         City;
+    latitude:        number;
+    longitude:       number;
 }
 
 export interface Picture {
@@ -255,6 +263,7 @@ export interface SellerAddress {
 }
 
 export interface City {
+    id?: string;
     name: string;
 }
 
@@ -296,7 +305,7 @@ export interface Item {
 
 export interface Price {
     currency?: string;
-    amount?:   number;
+    amount?:   string;
     decimals?: number;
 }
 

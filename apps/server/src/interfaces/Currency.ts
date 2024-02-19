@@ -2,7 +2,7 @@ export interface ICurrency {
     id:            string;
     symbol:        string;
     description:   string;
-    decimalPlaces: number;
+    decimal_places: number;
 }
 
 export interface ICurrencyAdapterResponse {
