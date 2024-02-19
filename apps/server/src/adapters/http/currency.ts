@@ -19,9 +19,10 @@ export class CurrencyAdapter {
         try {
             const apiUrl = config.API_URL
             const currencyInformation = await axios.get<ICurrency>(`${apiUrl}/currencies/${currencyId}`);
+            
             const currency = {
                 symbol: currencyInformation.data.symbol,
-                decimals: currencyInformation.data.decimalPlaces
+                decimals: currencyInformation.data.decimal_places
             }
 
             return currency;

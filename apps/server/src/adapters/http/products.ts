@@ -41,6 +41,7 @@ export class ProductAdapter {
                     picture: product.thumbnail,
                     condition: product.condition === 'new' ? 'Nuevo' : 'Usado',
                     free_shipping: product.shipping.free_shipping,
+                    location: product.location?.city.name || 'Ubicación no disponible'
                 }
             })
 
