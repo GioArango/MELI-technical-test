@@ -1,0 +1,15 @@
+@use '../abstracts/variables';
+
+html, body {
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: variables.$meli-gray-light;
+    height: 100%;
+}
+
+.divider {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid variables.$meli-gray-light;
+    margin: 0.5em 0;
+  }

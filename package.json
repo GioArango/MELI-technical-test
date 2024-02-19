@@ -1,0 +1,29 @@
+{
+  "name": "meli-technical-test",
+  "version": "1.0.0",
+  "description": "Prueba técnica Frontend de Mercado Libre",
+  "main": "index.js",
+  "scripts": {
+    "start:server": "npm run dev --workspace=apps/server",
+    "start:client": "npm run dev --workspace=apps/client",
+    "build:server": "npm run build --workspace=apps/server",
+    "build:client": "npm run build --workspace=apps/client",
+    "start:dev": "concurrently \"npm run start:client\" \"npm run start:server\"",
+    "start:prod": "npm run build:client && npm run start:server",
+    "build": "npm run build:client && npm run build:server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "sass": "^1.71.0"
+  }
+}
