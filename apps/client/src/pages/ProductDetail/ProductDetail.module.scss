@@ -2,45 +2,80 @@
 @use '@/scss/abstracts/mixins';
 
 .product-body {
-    display: flex;
-    padding: 0.5rem;
+  display: flex;
+  padding: 0.5rem;
   
-    .product-image {
-      width: 80%;
-      margin-inline: 3rem;
-      @include mixins.border-radius(0.25rem);
-      max-width: 550px;
-    } 
+  .product-image {
+    width: 80%;
+    margin-inline: 3rem;
+    @include mixins.border-radius(0.25rem);
+    max-width: 550px;
+  } 
+  
+  .product-resume {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 10px;
     
-    .product-resume {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        padding: 10px;
-        
-        > * {
-          margin-bottom: 20px;
-        }
-    }
-
-    .product-title {
-        font-size: 1.2rem;
-    }
-
-    .product-price {
-        font-size: 2.2rem;
+    > * {
+      margin-bottom: 20px;
     }
   }
 
+  .product-title {
+    font-size: 1.2rem;
+  }
+
+  .product-price {
+    font-size: 2.2rem;
+  }
+  
+}
+
+.description-container {
+  margin-top: 40px;
+  padding: 10px;
+  
+  .description {
+    font-size: 1.6rem;
+    margin-block: 20px;
+  }
+  
+  .content {
+    font-size: 1rem;
+    text-align: justify;
+    color: variables.$meli-gray-dark;
+    overflow-wrap: break-word;
+  }
+}
 
 .button-buy {
-    font-size: 20px;
-    border-radius: 4px;
-    background: variables.$meli-blue;
-    padding: 10px;
+  font-size: 20px;
+  border-radius: 4px;
+  background: variables.$meli-blue;
+  padding: 10px;
 
-    border: 0;
-    color: variables.$meli-white;
-    width: 100%;
-    cursor: pointer;
+  border: 0;
+  color: variables.$meli-white;
+  width: 100%;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .product-body {
+    flex-direction: column;
+    align-items: center;
+
+    .product-image {
+      width: 100%;
+      max-width: 100%;
+      margin-inline: 0;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .description-container {
+    text-align: center;
+  }
 }

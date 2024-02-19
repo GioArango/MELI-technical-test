@@ -3,44 +3,75 @@
 
 .product-container {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.5rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
 
   .product-image {
-    width: 100px;
-    margin-right: 1rem;
+    width: 100%;
+    margin-right: 0;
     @include mixins.border-radius(0.25rem);
   }
 
   .product-detail-container {
-    flex-grow: 1;
+    width: 100%;
+    margin-top: 0.5rem;
 
     .product-price-container {
-        display: flex;
-        margin-bottom: 0.5rem;
+      display: flex;
+      margin-bottom: 0.25rem;
 
-        .product-price {
-          display: flex;
-          margin-right: 1rem;
-          font-size: 1.25rem;
-        }
+      .product-price {
+        margin-right: 0.5rem;
+        font-size: 1rem;
+      }
     }
 
     .product-title {
-      margin-top: 0.5rem;
-      font-size: 1rem;
+      margin-top: 0.25rem;
+      font-size: 0.9rem;
     }
   }
 
   .product-location {
-    flex-grow: 1;
-    text-align: end;
-    margin: 0.25rem;
-  
+    width: 100%;
+    text-align: start;
+    margin: 0;
+
     p {
       font-size: 0.75rem;
       color: variables.$meli-gray-dark;
+    }
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+
+    .product-image {
+      width: 100px;
+      margin-right: 1rem;
+    }
+
+    .product-detail-container {
+      flex-grow: 1;
+      margin-top: 0;
+
+      .product-title {
+        margin-top: 0.5rem;
+        font-size: 1rem;
+      }
+    }
+
+    .product-location {
+      flex-grow: 1;
+      text-align: end;
+      margin: 0.25rem;
+
+      p {
+        font-size: 0.75rem;
+        color: variables.$meli-gray-dark;
+      }
     }
   }
 }

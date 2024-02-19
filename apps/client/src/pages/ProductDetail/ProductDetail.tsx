@@ -77,9 +77,9 @@ const ProductDetail = () => {
                   </button>
                 </div>
               </section>
-              <section className="product-description" style={{ marginTop: 40, padding: 10 }}>
-                <p className="description__h3" style={{ fontSize: '1.6rem', marginBlock: 20 }}>Descripción del producto</p>
-                <p className="description__p" style={{ fontSize: '1.rem', textAlign: 'justify' }}>
+              <section className={styles['description-container']}>
+                <p className={styles['description']}>Descripción del producto</p>
+                <p className={styles['content']}>
                   {product?.item.description ? product?.item.description : 'Descripción no disponible'}
                 </p>
               </section>
