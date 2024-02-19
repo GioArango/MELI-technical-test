@@ -25,7 +25,7 @@ export class Server {
 
     async start() {
 
-        const staticPath = path.join(__dirname, `../../../${this.publicPath}`);
+        const staticPath = path.join(__dirname, '../', this.publicPath);
 
         // middlewares
         this.app.use(express.static(staticPath));
