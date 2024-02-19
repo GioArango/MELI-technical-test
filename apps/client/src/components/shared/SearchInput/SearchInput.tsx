@@ -32,6 +32,7 @@ const SearchInput = ({ onSearch }: Props) => {
         className={styles['search-input']}
         defaultValue={queryParamValue ? queryParamValue : ''}
         onChange={handleChange} 
+        maxLength={100}
         />
       <button type="submit" className={styles['search-button']}>
         <img src={iconSearch} alt='Icono buscar'/>
