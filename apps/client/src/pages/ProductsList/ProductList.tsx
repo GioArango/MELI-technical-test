@@ -2,9 +2,9 @@ import { Categories, GenericContainer, GenericLoader } from "@/components";
 import { useAxiosFetch } from "@/hooks/useAxiosFetch";
 import { IProductsList } from "@/interfaces";
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useSearchParams } from "react-router-dom";
 import { ProductItem } from "./components";
-import { Helmet } from "react-helmet";
 
 const ProductList = () => {
 
@@ -49,7 +49,7 @@ const ProductList = () => {
                   {products.items.map((item, index) => (
                     <React.Fragment key={item.id}>
                       <ProductItem product={item} />
-                      {index !== products.items.length - 1 && <hr style={{ marginInline: 10, backgroundColor: 'red' }} />}
+                      {index !== products.items.length - 1 && <hr className='divider' />}
                     </React.Fragment>
                   ))}
                 </>
@@ -57,7 +57,7 @@ const ProductList = () => {
                 <React.Fragment>
                   {
                     (error) ?
-                      <span>No hay productos</span>
+                      <span>Ha ocurrido un error</span>
                       :
                       <span>No hay productos</span>
                   }

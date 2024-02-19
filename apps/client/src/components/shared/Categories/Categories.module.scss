@@ -1,0 +1,11 @@
+@use '@/scss/abstracts/variables';
+
+.categories {
+    margin-inline: 4.5rem;
+    padding: 18px;
+
+    &__text-categories {
+        color: variables.$meli-gray-dark;
+        font-size: 40;
+    }
+}
