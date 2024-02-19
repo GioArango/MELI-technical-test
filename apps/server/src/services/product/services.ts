@@ -3,6 +3,7 @@ import { CurrencyAdapter } from "../../adapters/http/currency";
 import { ProductAdapter } from "../../adapters/http/products";
 import { GenericResponse } from "../../interfaces/GenericResponse";
 import { IProductByIdServiceResponse, IProductItemAdapter, IProductListAdapterResponse, IProductsListServiceResponse, Item } from "../../interfaces/Product";
+import { formatCurrency } from "../../utils/CurrencyFormatter";
 
 
 
@@ -38,11 +39,12 @@ export class ProductService {
                     ...product,
                     price: {
                         currency: product.currency,
-                        amount: `${currency.symbol} ${product.price}`,
+                        amount:  formatCurrency(product.price, 0, product.currency),
                         decimals: currency.decimals
                     }
                 }
             })
+
 
             let response = {
                 categories: resp.result?.categories,
@@ -92,7 +94,7 @@ export class ProductService {
                 ...resp.result,
                 price: {
                     currency: resp.result?.currency,
-                    amount: resp.result?.price,
+                    amount: `${currency.symbol} ${formatCurrency(resp.result?.price, currency.decimals)}`,
                     decimals: currency.decimals
                 },
                 description: productDescription,
