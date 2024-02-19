@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { ProductController } from "./products/controller";
-import { ProductRoutes } from "./products/routes";
+import { ProductRoutes } from "./product/routes";
 
 
 export class AppRoutes {

@@ -1,6 +1,6 @@
 import { config } from "./config";
-import { AppRoutes } from "./presentation/routes";
-import { Server } from "./presentation/server";
+import { AppRoutes } from "./routes";
+import { Server } from "./server";
 
 (async () => {
     main();
