@@ -10,7 +10,6 @@ const Layout = () => {
     const navigate = useNavigate();
 
     const handleSearch = (searchCriteria: string) => {
-        console.log('Criterio de búsqueda', searchCriteria)
 
         navigate(`/items?search=${searchCriteria}`)
     }
