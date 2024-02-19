@@ -15,7 +15,7 @@ export class ProductController {
         try {
             const product = req.query.q;
 
-            if(!product || product === '') {
+            if(!product || product === '' || (product as string).length > 100) {
                 return res.status(400).json({
                     isSuccess: false,
                     message: 'Invalid data'
