@@ -4,10 +4,12 @@ import styles from './Layout.module.scss';
 import { Helmet } from 'react-helmet'
 import logo from '../assets/logo_meli.png'
 import { PATHS } from "@/constants";
+import { useFavorites } from "@/hooks/useFavorites";
 
 const Layout = () => {
 
     const navigate = useNavigate();
+    const { favsCount } = useFavorites()
 
     const handleSearch = (searchCriteria: string) => {
 
@@ -24,6 +26,7 @@ const Layout = () => {
                     <img src={logo} alt="Logo Mercado Libre" />                
                 </Link>
                 <SearchInput onSearch={handleSearch} />
+                <span style={{ marginInline: 2 }}>Favoritos: {favsCount}</span>
             </header>
             <Outlet />
         </main>

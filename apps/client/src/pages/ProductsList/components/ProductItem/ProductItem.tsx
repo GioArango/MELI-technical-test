@@ -3,12 +3,26 @@ import { IProductListItem } from "@/interfaces";
 import { Link } from "react-router-dom";
 import styles from '../../ProductList.module.scss';
 import iconShipping from '@assets/icon_shipping.png'
+import { useFavorites } from "@/hooks/useFavorites";
 
 interface Props {
     product: IProductListItem;
 }
 
 export const ProductItem = ({ product }: Props) => {
+
+    const { addFavorite } = useFavorites()
+
+    const handleAddFavorite = (product: IProductListItem) => {
+        const favoriteProduct = {
+            id: product.id,
+            name: product.title,
+            price: product.price.amount.toString(),
+            picture: product.picture
+        }
+
+        addFavorite(favoriteProduct)
+    }
 
     return (
         <div className={styles['product-container']}>
@@ -26,6 +40,7 @@ export const ProductItem = ({ product }: Props) => {
 
             <div className={styles['product-location']}>
                 <p>{product.location}</p>
+                <button onClick={() => handleAddFavorite(product)}>Añadir a favoritos</button>
             </div>
         </div>
     )
